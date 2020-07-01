@@ -1,6 +1,6 @@
 {
-  "name": "employee-data-management-tool",
-  "version": "0.0.0",
+  "name": "Chat-Bot-with-Watson-Assistant",
+  "version": "1.0.0",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
