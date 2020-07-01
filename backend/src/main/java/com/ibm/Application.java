@@ -1,4 +1,4 @@
-package main.java.com.ibm.myspringboot;
+package com.ibm;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
