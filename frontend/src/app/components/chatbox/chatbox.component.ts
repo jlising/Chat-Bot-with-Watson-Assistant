@@ -60,11 +60,11 @@ export class ChatboxComponent implements OnInit {
   public submit() {
     let obj:Sentence = new Sentence();
 	obj.direction="to-watson";
-	obj.text=this.queryString;
+	obj.text = this.queryString;
 	obj.sessionId = this._appGlobal.userSession.sessionId;
 	this.currentDialog.push(obj);
 	this._callConversation(this.queryString);
-	this.queryString="";
+	this.queryString = "";
   }
   
   /**
@@ -112,16 +112,16 @@ export class ChatboxComponent implements OnInit {
   }
 	
   /**
-   * Response onClick - not implemented yet
+   * Response onClick
    */
-  assistantResponse(resp) {
+  public clickResponse(message : string) {
       let obj:Sentence = new Sentence();
-      obj.direction="to-watson";
-      this.queryString=resp;
-      obj.text=resp;
+      obj.direction = "to-watson";
+      this.queryString = message;
+      obj.text = message;
       obj.sessionId = this._appGlobal.userSession.sessionId;
       this.currentDialog.push(obj);
-      this._callConversation(resp);
+      this._callConversation(message);
   }
   
   /**

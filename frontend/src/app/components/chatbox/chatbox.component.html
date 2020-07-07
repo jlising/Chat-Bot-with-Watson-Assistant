@@ -5,7 +5,7 @@
 
   <div #chatBox class="panel panel-default chat-box">
     <div class="panel-heading">
-      <h3 class="panel-title">Welcome to T-Mobile!</h3>
+      <h3 class="panel-title">Welcome to IBM!</h3>
       <span class="fa fa-times pull-right panel-icon chat-trigger-close">&nbsp;&nbsp;&nbsp;&nbsp;</span>
     </div>
 	
@@ -20,7 +20,7 @@
                     <div *ngIf="p.title" [innerHTML]="p.title"></div>
                     <div *ngFor="let c of p.options">
                       <br/>
-                      <button type="button" (click)="assistantResponse(c)" class="btn btn-primary">{{c.label}}</button>
+                      <a (click)="clickResponse(c.label)">{{c.label}}</a>
                     </div>
                   </div>
                 </div>
