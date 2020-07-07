@@ -6,10 +6,8 @@
 package com.ibm.controller;
 
 import com.ibm.component.Assistant;
-import com.ibm.model.MessageInput;
-import com.ibm.model.MessageOptions;
-import com.ibm.model.MessageResponse;
-import java.util.List;
+import com.ibm.dto.InputMessageDTO;
+import com.ibm.model.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,22 +29,30 @@ public class WatsonAssistantController {
     @Autowired
     Assistant assistant;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET, consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    public String getSessionID(){
-        return "hello";
+    @RequestMapping(value = "/session", method = RequestMethod.GET, consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    public SessionResponse createSession(){
+        CreateSessionOptions options = new CreateSessionOptions.Builder("91160115-9c06-475e-8799-733d3d0e515f").build();
+        SessionResponse response = assistant.createSession(options).execute().getResult();
+
+        return response;
     }
 
     @RequestMapping(value = "/talk", method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    public List<String> talk(@RequestBody String message){
-        LOG.info("Method ping() in class {} was called to checked if logged in.", this.getClass().getName());
+    public String talk(@RequestBody InputMessageDTO inputMessageDTO){
+        LOG.info("Method talk() in class {} was called to checked if logged in.", this.getClass().getName());
 
-        MessageInput messageInput = new MessageInput();
-        messageInput.setText(message);
-        MessageOptions options = new MessageOptions.Builder("cc8b19f5-7f6a-41cf-9a9a-a3b9b7b8e025").input(messageInput).build();
+        MessageInput input = new MessageInput.Builder()
+                .messageType("text")
+                .text(inputMessageDTO.getText())
+                .build();
+
+        MessageOptions options = new MessageOptions.Builder("91160115-9c06-475e-8799-733d3d0e515f", inputMessageDTO.getSessionId())
+                .input(input)
+                .build();
 
         MessageResponse response = assistant.message(options).execute().getResult();
         LOG.info("Response is {}", response);
 
-        return response.getOutput().getText();
+        return response.getOutput().getGeneric().toString();
     }
 }

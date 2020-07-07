@@ -13,84 +13,13 @@
 package com.ibm.model;
 
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
+import com.ibm.model.DialogNodeOutputOptionsElementValue;
 
 /** DialogNodeOutputOptionsElement. */
 public class DialogNodeOutputOptionsElement extends GenericModel {
 
   protected String label;
   protected DialogNodeOutputOptionsElementValue value;
-
-  /** Builder. */
-  public static class Builder {
-    private String label;
-    private DialogNodeOutputOptionsElementValue value;
-
-    private Builder(DialogNodeOutputOptionsElement dialogNodeOutputOptionsElement) {
-      this.label = dialogNodeOutputOptionsElement.label;
-      this.value = dialogNodeOutputOptionsElement.value;
-    }
-
-    /** Instantiates a new builder. */
-    public Builder() {}
-
-    /**
-     * Instantiates a new builder with required properties.
-     *
-     * @param label the label
-     * @param value the value
-     */
-    public Builder(String label, DialogNodeOutputOptionsElementValue value) {
-      this.label = label;
-      this.value = value;
-    }
-
-    /**
-     * Builds a DialogNodeOutputOptionsElement.
-     *
-     * @return the dialogNodeOutputOptionsElement
-     */
-    public DialogNodeOutputOptionsElement build() {
-      return new DialogNodeOutputOptionsElement(this);
-    }
-
-    /**
-     * Set the label.
-     *
-     * @param label the label
-     * @return the DialogNodeOutputOptionsElement builder
-     */
-    public Builder label(String label) {
-      this.label = label;
-      return this;
-    }
-
-    /**
-     * Set the value.
-     *
-     * @param value the value
-     * @return the DialogNodeOutputOptionsElement builder
-     */
-    public Builder value(DialogNodeOutputOptionsElementValue value) {
-      this.value = value;
-      return this;
-    }
-  }
-
-  protected DialogNodeOutputOptionsElement(Builder builder) {
-    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.label, "label cannot be null");
-    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.value, "value cannot be null");
-    label = builder.label;
-    value = builder.value;
-  }
-
-  /**
-   * New builder.
-   *
-   * @return a DialogNodeOutputOptionsElement builder
-   */
-  public Builder newBuilder() {
-    return new Builder(this);
-  }
 
   /**
    * Gets the label.
@@ -99,19 +28,19 @@ public class DialogNodeOutputOptionsElement extends GenericModel {
    *
    * @return the label
    */
-  public String label() {
+  public String getLabel() {
     return label;
   }
 
   /**
    * Gets the value.
    *
-   * <p>An object defining the message input to be sent to the Watson Assistant component if the user
-   * selects the corresponding option.
+   * <p>An object defining the message input to be sent to the assistant if the user selects the
+   * corresponding option.
    *
    * @return the value
    */
-  public DialogNodeOutputOptionsElementValue value() {
+  public DialogNodeOutputOptionsElementValue getValue() {
     return value;
   }
 }

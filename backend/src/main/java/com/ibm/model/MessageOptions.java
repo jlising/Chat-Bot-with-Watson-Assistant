@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2017, 2020.
+ * (C) Copyright IBM Corp. 2018, 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -13,42 +13,29 @@
 package com.ibm.model;
 
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.ibm.model.MessageContext;
+import com.ibm.model.MessageInput;
 
 /** The message options. */
 public class MessageOptions extends GenericModel {
 
-  protected String workspaceId;
-  protected MessageInput input;
-  protected List<RuntimeIntent> intents;
-  protected List<RuntimeEntity> entities;
-  protected Boolean alternateIntents;
-  protected Context context;
-  protected OutputData output;
-  protected Boolean nodesVisitedDetails;
+  protected String assistantId;
+  protected String sessionId;
+  protected com.ibm.model.MessageInput input;
+  protected com.ibm.model.MessageContext context;
 
   /** Builder. */
   public static class Builder {
-    private String workspaceId;
-    private MessageInput input;
-    private List<RuntimeIntent> intents;
-    private List<RuntimeEntity> entities;
-    private Boolean alternateIntents;
-    private Context context;
-    private OutputData output;
-    private Boolean nodesVisitedDetails;
+    private String assistantId;
+    private String sessionId;
+    private com.ibm.model.MessageInput input;
+    private com.ibm.model.MessageContext context;
 
     private Builder(MessageOptions messageOptions) {
-      this.workspaceId = messageOptions.workspaceId;
+      this.assistantId = messageOptions.assistantId;
+      this.sessionId = messageOptions.sessionId;
       this.input = messageOptions.input;
-      this.intents = messageOptions.intents;
-      this.entities = messageOptions.entities;
-      this.alternateIntents = messageOptions.alternateIntents;
       this.context = messageOptions.context;
-      this.output = messageOptions.output;
-      this.nodesVisitedDetails = messageOptions.nodesVisitedDetails;
     }
 
     /** Instantiates a new builder. */
@@ -57,10 +44,12 @@ public class MessageOptions extends GenericModel {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspaceId the workspaceId
+     * @param assistantId the assistantId
+     * @param sessionId the sessionId
      */
-    public Builder(String workspaceId) {
-      this.workspaceId = workspaceId;
+    public Builder(String assistantId, String sessionId) {
+      this.assistantId = assistantId;
+      this.sessionId = sessionId;
     }
 
     /**
@@ -73,43 +62,24 @@ public class MessageOptions extends GenericModel {
     }
 
     /**
-     * Adds an intent to intents.
+     * Set the assistantId.
      *
-     * @param intent the new intent
+     * @param assistantId the assistantId
      * @return the MessageOptions builder
      */
-    public Builder addIntent(RuntimeIntent intent) {
-      com.ibm.cloud.sdk.core.util.Validator.notNull(intent, "intent cannot be null");
-      if (this.intents == null) {
-        this.intents = new ArrayList<RuntimeIntent>();
-      }
-      this.intents.add(intent);
+    public Builder assistantId(String assistantId) {
+      this.assistantId = assistantId;
       return this;
     }
 
     /**
-     * Adds an entity to model.
+     * Set the sessionId.
      *
-     * @param entity the new entity
+     * @param sessionId the sessionId
      * @return the MessageOptions builder
      */
-    public Builder addEntity(RuntimeEntity entity) {
-      com.ibm.cloud.sdk.core.util.Validator.notNull(entity, "entity cannot be null");
-      if (this.entities == null) {
-        this.entities = new ArrayList<RuntimeEntity>();
-      }
-      this.entities.add(entity);
-      return this;
-    }
-
-    /**
-     * Set the workspaceId.
-     *
-     * @param workspaceId the workspaceId
-     * @return the MessageOptions builder
-     */
-    public Builder workspaceId(String workspaceId) {
-      this.workspaceId = workspaceId;
+    public Builder sessionId(String sessionId) {
+      this.sessionId = sessionId;
       return this;
     }
 
@@ -119,41 +89,8 @@ public class MessageOptions extends GenericModel {
      * @param input the input
      * @return the MessageOptions builder
      */
-    public Builder input(MessageInput input) {
+    public Builder input(com.ibm.model.MessageInput input) {
       this.input = input;
-      return this;
-    }
-
-    /**
-     * Set the intents. Existing intents will be replaced.
-     *
-     * @param intents the intents
-     * @return the MessageOptions builder
-     */
-    public Builder intents(List<RuntimeIntent> intents) {
-      this.intents = intents;
-      return this;
-    }
-
-    /**
-     * Set the model. Existing model will be replaced.
-     *
-     * @param entities the model
-     * @return the MessageOptions builder
-     */
-    public Builder entities(List<RuntimeEntity> entities) {
-      this.entities = entities;
-      return this;
-    }
-
-    /**
-     * Set the alternateIntents.
-     *
-     * @param alternateIntents the alternateIntents
-     * @return the MessageOptions builder
-     */
-    public Builder alternateIntents(Boolean alternateIntents) {
-      this.alternateIntents = alternateIntents;
       return this;
     }
 
@@ -163,61 +100,20 @@ public class MessageOptions extends GenericModel {
      * @param context the context
      * @return the MessageOptions builder
      */
-    public Builder context(Context context) {
+    public Builder context(com.ibm.model.MessageContext context) {
       this.context = context;
-      return this;
-    }
-
-    /**
-     * Set the output.
-     *
-     * @param output the output
-     * @return the MessageOptions builder
-     */
-    public Builder output(OutputData output) {
-      this.output = output;
-      return this;
-    }
-
-    /**
-     * Set the nodesVisitedDetails.
-     *
-     * @param nodesVisitedDetails the nodesVisitedDetails
-     * @return the MessageOptions builder
-     */
-    public Builder nodesVisitedDetails(Boolean nodesVisitedDetails) {
-      this.nodesVisitedDetails = nodesVisitedDetails;
-      return this;
-    }
-
-    /**
-     * Set the messageRequest.
-     *
-     * @param messageRequest the messageRequest
-     * @return the MessageOptions builder
-     */
-    public Builder messageRequest(MessageRequest messageRequest) {
-      this.input = messageRequest.input();
-      this.intents = messageRequest.intents();
-      this.entities = messageRequest.entities();
-      this.alternateIntents = messageRequest.alternateIntents();
-      this.context = messageRequest.context();
-      this.output = messageRequest.output();
       return this;
     }
   }
 
   protected MessageOptions(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notEmpty(
-            builder.workspaceId, "workspaceId cannot be empty");
-    workspaceId = builder.workspaceId;
+        builder.assistantId, "assistantId cannot be empty");
+    com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.sessionId, "sessionId cannot be empty");
+    assistantId = builder.assistantId;
+    sessionId = builder.sessionId;
     input = builder.input;
-    intents = builder.intents;
-    entities = builder.entities;
-    alternateIntents = builder.alternateIntents;
     context = builder.context;
-    output = builder.output;
-    nodesVisitedDetails = builder.nodesVisitedDetails;
   }
 
   /**
@@ -230,14 +126,30 @@ public class MessageOptions extends GenericModel {
   }
 
   /**
-   * Gets the workspaceId.
+   * Gets the assistantId.
    *
-   * <p>Unique identifier of the workspace.
+   * <p>Unique identifier of the assistant. To find the assistant ID in the Watson Assistant user
+   * interface, open the assistant settings and click **API Details**. For information about
+   * creating assistants, see the
+   * [documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-assistant-add#assistant-add-task).
    *
-   * @return the workspaceId
+   * <p>**Note:** Currently, the v2 API does not support creating assistants.
+   *
+   * @return the assistantId
    */
-  public String workspaceId() {
-    return workspaceId;
+  public String assistantId() {
+    return assistantId;
+  }
+
+  /**
+   * Gets the sessionId.
+   *
+   * <p>Unique identifier of the session.
+   *
+   * @return the sessionId
+   */
+  public String sessionId() {
+    return sessionId;
   }
 
   /**
@@ -252,74 +164,18 @@ public class MessageOptions extends GenericModel {
   }
 
   /**
-   * Gets the intents.
-   *
-   * <p>Intents to use when evaluating the user input. Include intents from the previous response to
-   * continue using those intents rather than trying to recognize intents in the new input.
-   *
-   * @return the intents
-   */
-  public List<RuntimeIntent> intents() {
-    return intents;
-  }
-
-  /**
-   * Gets the model.
-   *
-   * <p>Entities to use when evaluating the message. Include model from the previous response to
-   * continue using those model rather than detecting model in the new input.
-   *
-   * @return the model
-   */
-  public List<RuntimeEntity> entities() {
-    return entities;
-  }
-
-  /**
-   * Gets the alternateIntents.
-   *
-   * <p>Whether to return more than one intent. A value of `true` indicates that all matching
-   * intents are returned.
-   *
-   * @return the alternateIntents
-   */
-  public Boolean alternateIntents() {
-    return alternateIntents;
-  }
-
-  /**
    * Gets the context.
    *
-   * <p>State information for the conversation. To maintain state, include the context from the
-   * previous response.
+   * <p>Context data for the conversation. You can use this property to set or modify context
+   * variables, which can also be accessed by dialog nodes. The context is stored by the assistant
+   * on a per-session basis.
+   *
+   * <p>**Note:** The total size of the context data stored for a stateful session cannot exceed
+   * 100KB.
    *
    * @return the context
    */
-  public Context context() {
+  public MessageContext context() {
     return context;
-  }
-
-  /**
-   * Gets the output.
-   *
-   * <p>An output object that includes the response to the user, the dialog nodes that were
-   * triggered, and messages from the log.
-   *
-   * @return the output
-   */
-  public OutputData output() {
-    return output;
-  }
-
-  /**
-   * Gets the nodesVisitedDetails.
-   *
-   * <p>Whether to include additional diagnostic information about the dialog nodes that were
-   * visited during processing of the message.
-   *
-   * @return the nodesVisitedDetails
-   */
-  public Boolean nodesVisitedDetails() {
-    return nodesVisitedDetails;
   }
 }

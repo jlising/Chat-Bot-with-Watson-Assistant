@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2016, 2020.
+ * (C) Copyright IBM Corp. 2018, 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -12,108 +12,39 @@
  */
 package com.ibm.model;
 
-import com.google.gson.annotations.SerializedName;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
-import com.ibm.model.*;
-import com.ibm.model.MessageInput;
-import com.ibm.model.OutputData;
+import com.ibm.model.MessageContext;
+import com.ibm.model.MessageOutput;
 
-import java.util.List;
-
-/**
- * The response sent by the workspace, including the output text, detected intents and model, and
- * context.
- */
+/** A response from the Watson Assistant service. */
 public class MessageResponse extends GenericModel {
 
-  protected MessageInput input;
-  protected List<RuntimeIntent> intents;
-  protected List<RuntimeEntity> entities;
-
-  @SerializedName("alternate_intents")
-  protected Boolean alternateIntents;
-
-  protected Context context;
-  protected OutputData output;
-  protected List<DialogNodeAction> actions;
+  protected com.ibm.model.MessageOutput output;
+  protected com.ibm.model.MessageContext context;
 
   /**
-   * Gets the input.
+   * Gets the output.
    *
-   * <p>An input object that includes the input text.
+   * <p>Assistant output to be rendered or processed by the client.
    *
-   * @return the input
+   * @return the output
    */
-  public MessageInput getInput() {
-    return input;
-  }
-
-  /**
-   * Gets the intents.
-   *
-   * <p>An array of intents recognized in the user input, sorted in descending order of confidence.
-   *
-   * @return the intents
-   */
-  public List<RuntimeIntent> getIntents() {
-    return intents;
-  }
-
-  /**
-   * Gets the model.
-   *
-   * <p>An array of model identified in the user input.
-   *
-   * @return the model
-   */
-  public List<RuntimeEntity> getEntities() {
-    return entities;
-  }
-
-  /**
-   * Gets the alternateIntents.
-   *
-   * <p>Whether to return more than one intent. A value of `true` indicates that all matching
-   * intents are returned.
-   *
-   * @return the alternateIntents
-   */
-  public Boolean isAlternateIntents() {
-    return alternateIntents;
+  public MessageOutput getOutput() {
+    return output;
   }
 
   /**
    * Gets the context.
    *
-   * <p>State information for the conversation. To maintain state, include the context from the
-   * previous response.
+   * <p>Context data for the conversation. You can use this property to access context variables.
+   * The context is stored by the assistant on a per-session basis.
+   *
+   * <p>**Note:** The context is included in message responses only if **return_context**=`true` in
+   * the message request.
    *
    * @return the context
    */
-  public Context getContext() {
+  public MessageContext getContext() {
     return context;
-  }
-
-  /**
-   * Gets the output.
-   *
-   * <p>An output object that includes the response to the user, the dialog nodes that were
-   * triggered, and messages from the log.
-   *
-   * @return the output
-   */
-  public OutputData getOutput() {
-    return output;
-  }
-
-  /**
-   * Gets the actions.
-   *
-   * <p>An array of objects describing any actions requested by the dialog node.
-   *
-   * @return the actions
-   */
-  public List<DialogNodeAction> getActions() {
-    return actions;
   }
 }

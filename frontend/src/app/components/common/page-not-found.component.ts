@@ -1,8 +1,3 @@
-/**
- * Page not found component. This will handle all page error related
- * @author : Jesus Lising <jess.lising@gmail.com>
- */
-
 import {Component } from '@angular/core';
 
 @Component({

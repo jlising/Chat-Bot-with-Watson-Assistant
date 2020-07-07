@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2017, 2020.
+ * (C) Copyright IBM Corp. 2018, 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -13,12 +13,16 @@
 package com.ibm.model;
 
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
+import com.ibm.model.CaptureGroup;
+import com.ibm.model.RuntimeEntityAlternative;
+import com.ibm.model.RuntimeEntityInterpretation;
+import com.ibm.model.RuntimeEntityRole;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-/** A term from the request that was identified as an entity. */
+/** The entity value that was recognized in the user input. */
 public class RuntimeEntity extends GenericModel {
 
   protected String entity;
@@ -26,7 +30,7 @@ public class RuntimeEntity extends GenericModel {
   protected String value;
   protected Double confidence;
   protected Map<String, Object> metadata;
-  protected List<CaptureGroup> groups;
+  protected List<com.ibm.model.CaptureGroup> groups;
   protected RuntimeEntityInterpretation interpretation;
   protected List<RuntimeEntityAlternative> alternatives;
   protected RuntimeEntityRole role;
@@ -38,7 +42,7 @@ public class RuntimeEntity extends GenericModel {
     private String value;
     private Double confidence;
     private Map<String, Object> metadata;
-    private List<CaptureGroup> groups;
+    private List<com.ibm.model.CaptureGroup> groups;
     private RuntimeEntityInterpretation interpretation;
     private List<RuntimeEntityAlternative> alternatives;
     private RuntimeEntityRole role;
@@ -101,10 +105,10 @@ public class RuntimeEntity extends GenericModel {
      * @param groups the new groups
      * @return the RuntimeEntity builder
      */
-    public Builder addGroups(CaptureGroup groups) {
+    public Builder addGroups(com.ibm.model.CaptureGroup groups) {
       com.ibm.cloud.sdk.core.util.Validator.notNull(groups, "groups cannot be null");
       if (this.groups == null) {
-        this.groups = new ArrayList<CaptureGroup>();
+        this.groups = new ArrayList<com.ibm.model.CaptureGroup>();
       }
       this.groups.add(groups);
       return this;
@@ -186,7 +190,7 @@ public class RuntimeEntity extends GenericModel {
      * @param groups the groups
      * @return the RuntimeEntity builder
      */
-    public Builder groups(List<CaptureGroup> groups) {
+    public Builder groups(List<com.ibm.model.CaptureGroup> groups) {
       this.groups = groups;
       return this;
     }
@@ -275,7 +279,7 @@ public class RuntimeEntity extends GenericModel {
   /**
    * Gets the value.
    *
-   * <p>The entity value that was recognized in the user input.
+   * <p>The term in the input text that was recognized as an entity value.
    *
    * @return the value
    */
@@ -320,9 +324,9 @@ public class RuntimeEntity extends GenericModel {
    * Gets the interpretation.
    *
    * <p>An object containing detailed information about the entity recognized in the user input.
-   * This property is included only if the new system model are enabled for the workspace.
+   * This property is included only if the new system entities are enabled for the skill.
    *
-   * <p>For more information about how the new system model are interpreted, see the
+   * <p>For more information about how the new system entities are interpreted, see the
    * [documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-beta-system-entities).
    *
    * @return the interpretation
@@ -336,9 +340,9 @@ public class RuntimeEntity extends GenericModel {
    *
    * <p>An array of possible alternative values that the user might have intended instead of the
    * value returned in the **value** property. This property is returned only for `@sys-time` and
-   * `@sys-date` model when the user's input is ambiguous.
+   * `@sys-date` entities when the user's input is ambiguous.
    *
-   * <p>This property is included only if the new system model are enabled for the workspace.
+   * <p>This property is included only if the new system entities are enabled for the skill.
    *
    * @return the alternatives
    */
@@ -351,7 +355,7 @@ public class RuntimeEntity extends GenericModel {
    *
    * <p>An object describing the role played by a system entity that is specifies the beginning or
    * end of a range recognized in the user input. This property is included only if the new system
-   * model are enabled for the workspace.
+   * entities are enabled for the skill.
    *
    * @return the role
    */

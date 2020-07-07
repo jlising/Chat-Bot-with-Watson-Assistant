@@ -531,7 +531,7 @@ public class RuntimeEntityInterpretation extends GenericModel {
    *
    * <p>A unique identifier used to associate a recognized time and date. If the user input contains
    * a date and time that are mentioned together (for example, `Today at 5`, the same
-   * **datetime_link** value is returned for both the `@sys-date` and `@sys-time` model).
+   * **datetime_link** value is returned for both the `@sys-date` and `@sys-time` entities).
    *
    * @return the datetimeLink
    */
@@ -567,7 +567,7 @@ public class RuntimeEntityInterpretation extends GenericModel {
    * Gets the rangeLink.
    *
    * <p>A unique identifier used to associate multiple recognized `@sys-date`, `@sys-time`, or
-   * `@sys-number` model that are recognized as a range of values in the user's input (for
+   * `@sys-number` entities that are recognized as a range of values in the user's input (for
    * example, `from July 4 until July 14` or `from 20 to 25`).
    *
    * @return the rangeLink

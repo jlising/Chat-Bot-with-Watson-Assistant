@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2019, 2020.
+ * (C) Copyright IBM Corp. 2018, 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -13,29 +13,189 @@
 package com.ibm.model;
 
 import com.google.gson.annotations.SerializedName;
-import com.google.gson.reflect.TypeToken;
-import com.ibm.cloud.sdk.core.service.model.DynamicModel;
+import com.ibm.cloud.sdk.core.service.model.GenericModel;
+import com.ibm.model.MessageInputOptions;
+import com.ibm.model.RuntimeEntity;
+import com.ibm.model.RuntimeIntent;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /** An input object that includes the input text. */
-public class MessageInput extends DynamicModel<Object> {
+public class MessageInput extends GenericModel {
 
-  @SerializedName("text")
+  /** The type of user input. Currently, only text input is supported. */
+  public interface MessageType {
+    /** text. */
+    String TEXT = "text";
+  }
+
+  @SerializedName("message_type")
+  protected String messageType;
+
   protected String text;
+  protected List<RuntimeIntent> intents;
+  protected List<RuntimeEntity> entities;
 
-  @SerializedName("spelling_suggestions")
-  protected Boolean spellingSuggestions;
+  @SerializedName("suggestion_id")
+  protected String suggestionId;
 
-  @SerializedName("spelling_auto_correct")
-  protected Boolean spellingAutoCorrect;
+  protected MessageInputOptions options;
 
-  @SerializedName("suggested_text")
-  protected String suggestedText;
+  /** Builder. */
+  public static class Builder {
+    private String messageType;
+    private String text;
+    private List<RuntimeIntent> intents;
+    private List<RuntimeEntity> entities;
+    private String suggestionId;
+    private MessageInputOptions options;
 
-  @SerializedName("original_text")
-  protected String originalText;
+    private Builder(MessageInput messageInput) {
+      this.messageType = messageInput.messageType;
+      this.text = messageInput.text;
+      this.intents = messageInput.intents;
+      this.entities = messageInput.entities;
+      this.suggestionId = messageInput.suggestionId;
+      this.options = messageInput.options;
+    }
 
-  public MessageInput() {
-    super(new TypeToken<Object>() {});
+    /** Instantiates a new builder. */
+    public Builder() {}
+
+    /**
+     * Builds a MessageInput.
+     *
+     * @return the messageInput
+     */
+    public MessageInput build() {
+      return new MessageInput(this);
+    }
+
+    /**
+     * Adds an intent to intents.
+     *
+     * @param intent the new intent
+     * @return the MessageInput builder
+     */
+    public Builder addIntent(RuntimeIntent intent) {
+      com.ibm.cloud.sdk.core.util.Validator.notNull(intent, "intent cannot be null");
+      if (this.intents == null) {
+        this.intents = new ArrayList<RuntimeIntent>();
+      }
+      this.intents.add(intent);
+      return this;
+    }
+
+    /**
+     * Adds an entity to entities.
+     *
+     * @param entity the new entity
+     * @return the MessageInput builder
+     */
+    public Builder addEntity(RuntimeEntity entity) {
+      com.ibm.cloud.sdk.core.util.Validator.notNull(entity, "entity cannot be null");
+      if (this.entities == null) {
+        this.entities = new ArrayList<RuntimeEntity>();
+      }
+      this.entities.add(entity);
+      return this;
+    }
+
+    /**
+     * Set the messageType.
+     *
+     * @param messageType the messageType
+     * @return the MessageInput builder
+     */
+    public Builder messageType(String messageType) {
+      this.messageType = messageType;
+      return this;
+    }
+
+    /**
+     * Set the text.
+     *
+     * @param text the text
+     * @return the MessageInput builder
+     */
+    public Builder text(String text) {
+      this.text = text;
+      return this;
+    }
+
+    /**
+     * Set the intents. Existing intents will be replaced.
+     *
+     * @param intents the intents
+     * @return the MessageInput builder
+     */
+    public Builder intents(List<RuntimeIntent> intents) {
+      this.intents = intents;
+      return this;
+    }
+
+    /**
+     * Set the entities. Existing entities will be replaced.
+     *
+     * @param entities the entities
+     * @return the MessageInput builder
+     */
+    public Builder entities(List<RuntimeEntity> entities) {
+      this.entities = entities;
+      return this;
+    }
+
+    /**
+     * Set the suggestionId.
+     *
+     * @param suggestionId the suggestionId
+     * @return the MessageInput builder
+     */
+    public Builder suggestionId(String suggestionId) {
+      this.suggestionId = suggestionId;
+      return this;
+    }
+
+    /**
+     * Set the options.
+     *
+     * @param options the options
+     * @return the MessageInput builder
+     */
+    public Builder options(MessageInputOptions options) {
+      this.options = options;
+      return this;
+    }
+  }
+
+  protected MessageInput(Builder builder) {
+    messageType = builder.messageType;
+    text = builder.text;
+    intents = builder.intents;
+    entities = builder.entities;
+    suggestionId = builder.suggestionId;
+    options = builder.options;
+  }
+
+  /**
+   * New builder.
+   *
+   * @return a MessageInput builder
+   */
+  public Builder newBuilder() {
+    return new Builder(this);
+  }
+
+  /**
+   * Gets the messageType.
+   *
+   * <p>The type of user input. Currently, only text input is supported.
+   *
+   * @return the messageType
+   */
+  public String messageType() {
+    return messageType;
   }
 
   /**
@@ -46,104 +206,53 @@ public class MessageInput extends DynamicModel<Object> {
    *
    * @return the text
    */
-  public String getText() {
-    return this.text;
+  public String text() {
+    return text;
   }
 
   /**
-   * Sets the text.
+   * Gets the intents.
    *
-   * @param text the new text
+   * <p>Intents to use when evaluating the user input. Include intents from the previous response to
+   * continue using those intents rather than trying to recognize intents in the new input.
+   *
+   * @return the intents
    */
-  public void setText(final String text) {
-    this.text = text;
+  public List<RuntimeIntent> intents() {
+    return intents;
   }
 
   /**
-   * Gets the spellingSuggestions.
+   * Gets the entities.
    *
-   * <p>Whether to use spelling correction when processing the input. This property overrides the
-   * value of the **spelling_suggestions** property in the workspace settings.
+   * <p>Entities to use when evaluating the message. Include entities from the previous response to
+   * continue using those entities rather than detecting entities in the new input.
    *
-   * @return the spellingSuggestions
+   * @return the entities
    */
-  public Boolean isSpellingSuggestions() {
-    return this.spellingSuggestions;
+  public List<RuntimeEntity> entities() {
+    return entities;
   }
 
   /**
-   * Sets the spellingSuggestions.
+   * Gets the suggestionId.
    *
-   * @param spellingSuggestions the new spellingSuggestions
+   * <p>For internal use only.
+   *
+   * @return the suggestionId
    */
-  public void setSpellingSuggestions(final Boolean spellingSuggestions) {
-    this.spellingSuggestions = spellingSuggestions;
+  public String suggestionId() {
+    return suggestionId;
   }
 
   /**
-   * Gets the spellingAutoCorrect.
+   * Gets the options.
    *
-   * <p>Whether to use autocorrection when processing the input. If spelling correction is used and
-   * this property is `false`, any suggested corrections are returned in the **suggested_text**
-   * property of the message response. If this property is `true`, any corrections are automatically
-   * applied to the user input, and the original text is returned in the **original_text** property
-   * of the message response. This property overrides the value of the **spelling_auto_correct**
-   * property in the workspace settings.
+   * <p>Optional properties that control how the assistant responds.
    *
-   * @return the spellingAutoCorrect
+   * @return the options
    */
-  public Boolean isSpellingAutoCorrect() {
-    return this.spellingAutoCorrect;
-  }
-
-  /**
-   * Sets the spellingAutoCorrect.
-   *
-   * @param spellingAutoCorrect the new spellingAutoCorrect
-   */
-  public void setSpellingAutoCorrect(final Boolean spellingAutoCorrect) {
-    this.spellingAutoCorrect = spellingAutoCorrect;
-  }
-
-  /**
-   * Gets the suggestedText.
-   *
-   * <p>Any suggested corrections of the input text. This property is returned only if spelling
-   * correction is enabled and autocorrection is disabled.
-   *
-   * @return the suggestedText
-   */
-  public String getSuggestedText() {
-    return this.suggestedText;
-  }
-
-  /**
-   * Sets the suggestedText.
-   *
-   * @param suggestedText the new suggestedText
-   */
-  public void setSuggestedText(final String suggestedText) {
-    this.suggestedText = suggestedText;
-  }
-
-  /**
-   * Gets the originalText.
-   *
-   * <p>The original user input text. This property is returned only if autocorrection is enabled
-   * and the user input was corrected.
-   *
-   * @return the originalText
-   */
-  public String getOriginalText() {
-    return this.originalText;
-  }
-
-  /**
-   * Sets the originalText.
-   *
-   * @param originalText the new originalText
-   */
-  public void setOriginalText(final String originalText) {
-    this.originalText = originalText;
+  public MessageInputOptions options() {
+    return options;
   }
 }

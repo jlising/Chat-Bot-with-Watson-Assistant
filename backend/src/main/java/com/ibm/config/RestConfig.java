@@ -17,12 +17,13 @@ import org.springframework.context.annotation.Configuration;
 @ComponentScan(basePackages = {"com.ibm"})
 public class RestConfig {
     private static final Logger LOG = LoggerFactory.getLogger(RestConfig.class);
+    private static String WATSON_SERVICE_URL = "https://api.us-south.assistant.watson.cloud.ibm.com";
 
     @Bean
     public Assistant getAssistant(){
         Authenticator authenticator = new IamAuthenticator("w-J0DBGFx5t3MyahLAT7vqvo7N9ElLuHtSV7MNP3gDXa");
         Assistant assistant = new Assistant("2020-04-01", authenticator);
-
+        assistant.setServiceUrl(WATSON_SERVICE_URL);
         return assistant;
     }
 }

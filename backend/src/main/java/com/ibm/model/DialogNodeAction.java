@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2017, 2020.
+ * (C) Copyright IBM Corp. 2018, 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -14,7 +14,6 @@ package com.ibm.model;
 
 import com.google.gson.annotations.SerializedName;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
-
 import java.util.Map;
 
 /** DialogNodeAction. */
@@ -26,12 +25,10 @@ public class DialogNodeAction extends GenericModel {
     String CLIENT = "client";
     /** server. */
     String SERVER = "server";
-    /** cloud_function. */
-    String CLOUD_FUNCTION = "cloud_function";
-    /** web_action. */
-    String WEB_ACTION = "web_action";
-    /** webhook. */
-    String WEBHOOK = "webhook";
+    /** web-action. */
+    String WEB_ACTION = "web-action";
+    /** cloud-function. */
+    String CLOUD_FUNCTION = "cloud-function";
   }
 
   protected String name;
@@ -43,121 +40,6 @@ public class DialogNodeAction extends GenericModel {
 
   protected String credentials;
 
-  /** Builder. */
-  public static class Builder {
-    private String name;
-    private String type;
-    private Map<String, Object> parameters;
-    private String resultVariable;
-    private String credentials;
-
-    private Builder(DialogNodeAction dialogNodeAction) {
-      this.name = dialogNodeAction.name;
-      this.type = dialogNodeAction.type;
-      this.parameters = dialogNodeAction.parameters;
-      this.resultVariable = dialogNodeAction.resultVariable;
-      this.credentials = dialogNodeAction.credentials;
-    }
-
-    /** Instantiates a new builder. */
-    public Builder() {}
-
-    /**
-     * Instantiates a new builder with required properties.
-     *
-     * @param name the name
-     * @param resultVariable the resultVariable
-     */
-    public Builder(String name, String resultVariable) {
-      this.name = name;
-      this.resultVariable = resultVariable;
-    }
-
-    /**
-     * Builds a DialogNodeAction.
-     *
-     * @return the dialogNodeAction
-     */
-    public DialogNodeAction build() {
-      return new DialogNodeAction(this);
-    }
-
-    /**
-     * Set the name.
-     *
-     * @param name the name
-     * @return the DialogNodeAction builder
-     */
-    public Builder name(String name) {
-      this.name = name;
-      return this;
-    }
-
-    /**
-     * Set the type.
-     *
-     * @param type the type
-     * @return the DialogNodeAction builder
-     */
-    public Builder type(String type) {
-      this.type = type;
-      return this;
-    }
-
-    /**
-     * Set the parameters.
-     *
-     * @param parameters the parameters
-     * @return the DialogNodeAction builder
-     */
-    public Builder parameters(Map<String, Object> parameters) {
-      this.parameters = parameters;
-      return this;
-    }
-
-    /**
-     * Set the resultVariable.
-     *
-     * @param resultVariable the resultVariable
-     * @return the DialogNodeAction builder
-     */
-    public Builder resultVariable(String resultVariable) {
-      this.resultVariable = resultVariable;
-      return this;
-    }
-
-    /**
-     * Set the credentials.
-     *
-     * @param credentials the credentials
-     * @return the DialogNodeAction builder
-     */
-    public Builder credentials(String credentials) {
-      this.credentials = credentials;
-      return this;
-    }
-  }
-
-  protected DialogNodeAction(Builder builder) {
-    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.name, "name cannot be null");
-    com.ibm.cloud.sdk.core.util.Validator.notNull(
-        builder.resultVariable, "resultVariable cannot be null");
-    name = builder.name;
-    type = builder.type;
-    parameters = builder.parameters;
-    resultVariable = builder.resultVariable;
-    credentials = builder.credentials;
-  }
-
-  /**
-   * New builder.
-   *
-   * @return a DialogNodeAction builder
-   */
-  public Builder newBuilder() {
-    return new Builder(this);
-  }
-
   /**
    * Gets the name.
    *
@@ -165,7 +47,7 @@ public class DialogNodeAction extends GenericModel {
    *
    * @return the name
    */
-  public String name() {
+  public String getName() {
     return name;
   }
 
@@ -176,7 +58,7 @@ public class DialogNodeAction extends GenericModel {
    *
    * @return the type
    */
-  public String type() {
+  public String getType() {
     return type;
   }
 
@@ -187,7 +69,7 @@ public class DialogNodeAction extends GenericModel {
    *
    * @return the parameters
    */
-  public Map<String, Object> parameters() {
+  public Map<String, Object> getParameters() {
     return parameters;
   }
 
@@ -198,7 +80,7 @@ public class DialogNodeAction extends GenericModel {
    *
    * @return the resultVariable
    */
-  public String resultVariable() {
+  public String getResultVariable() {
     return resultVariable;
   }
 
@@ -210,7 +92,7 @@ public class DialogNodeAction extends GenericModel {
    *
    * @return the credentials
    */
-  public String credentials() {
+  public String getCredentials() {
     return credentials;
   }
 }

@@ -13,11 +13,10 @@
 package com.ibm.model;
 
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
-
 import java.util.ArrayList;
 import java.util.List;
 
-/** A recognized capture group for a pattern-based entity. */
+/** CaptureGroup. */
 public class CaptureGroup extends GenericModel {
 
   protected String group;

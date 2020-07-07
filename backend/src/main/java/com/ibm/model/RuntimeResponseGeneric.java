@@ -14,6 +14,9 @@ package com.ibm.model;
 
 import com.google.gson.annotations.SerializedName;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
+import com.ibm.model.DialogNodeOutputOptionsElement;
+import com.ibm.model.DialogSuggestion;
+import com.ibm.model.SearchResult;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +29,7 @@ public class RuntimeResponseGeneric extends GenericModel {
    * by the client application or channel.
    *
    * <p>**Note:** The **suggestion** response type is part of the disambiguation feature, which is
-   * only available for Plus and Premium users.
+   * only available for Premium users.
    */
   public interface ResponseType {
     /** text. */
@@ -41,6 +44,8 @@ public class RuntimeResponseGeneric extends GenericModel {
     String CONNECT_TO_AGENT = "connect_to_agent";
     /** suggestion. */
     String SUGGESTION = "suggestion";
+    /** search. */
+    String SEARCH = "search";
   }
 
   /** The preferred type of control to display. */
@@ -61,17 +66,15 @@ public class RuntimeResponseGeneric extends GenericModel {
   protected String title;
   protected String description;
   protected String preference;
-  protected List<DialogNodeOutputOptionsElement> options;
+  protected List<com.ibm.model.DialogNodeOutputOptionsElement> options;
 
   @SerializedName("message_to_human_agent")
   protected String messageToHumanAgent;
 
   protected String topic;
-
-  @SerializedName("dialog_node")
-  protected String dialogNode;
-
-  protected List<DialogSuggestion> suggestions;
+  protected List<com.ibm.model.DialogSuggestion> suggestions;
+  protected String header;
+  protected List<SearchResult> results;
 
   /** Builder. */
   public static class Builder {
@@ -83,11 +86,12 @@ public class RuntimeResponseGeneric extends GenericModel {
     private String title;
     private String description;
     private String preference;
-    private List<DialogNodeOutputOptionsElement> options;
+    private List<com.ibm.model.DialogNodeOutputOptionsElement> options;
     private String messageToHumanAgent;
     private String topic;
-    private String dialogNode;
-    private List<DialogSuggestion> suggestions;
+    private List<com.ibm.model.DialogSuggestion> suggestions;
+    private String header;
+    private List<SearchResult> results;
 
     private Builder(RuntimeResponseGeneric runtimeResponseGeneric) {
       this.responseType = runtimeResponseGeneric.responseType;
@@ -101,8 +105,9 @@ public class RuntimeResponseGeneric extends GenericModel {
       this.options = runtimeResponseGeneric.options;
       this.messageToHumanAgent = runtimeResponseGeneric.messageToHumanAgent;
       this.topic = runtimeResponseGeneric.topic;
-      this.dialogNode = runtimeResponseGeneric.dialogNode;
       this.suggestions = runtimeResponseGeneric.suggestions;
+      this.header = runtimeResponseGeneric.header;
+      this.results = runtimeResponseGeneric.results;
     }
 
     /** Instantiates a new builder. */
@@ -132,10 +137,10 @@ public class RuntimeResponseGeneric extends GenericModel {
      * @param options the new options
      * @return the RuntimeResponseGeneric builder
      */
-    public Builder addOptions(DialogNodeOutputOptionsElement options) {
+    public Builder addOptions(com.ibm.model.DialogNodeOutputOptionsElement options) {
       com.ibm.cloud.sdk.core.util.Validator.notNull(options, "options cannot be null");
       if (this.options == null) {
-        this.options = new ArrayList<DialogNodeOutputOptionsElement>();
+        this.options = new ArrayList<com.ibm.model.DialogNodeOutputOptionsElement>();
       }
       this.options.add(options);
       return this;
@@ -147,12 +152,27 @@ public class RuntimeResponseGeneric extends GenericModel {
      * @param suggestions the new suggestions
      * @return the RuntimeResponseGeneric builder
      */
-    public Builder addSuggestions(DialogSuggestion suggestions) {
+    public Builder addSuggestions(com.ibm.model.DialogSuggestion suggestions) {
       com.ibm.cloud.sdk.core.util.Validator.notNull(suggestions, "suggestions cannot be null");
       if (this.suggestions == null) {
-        this.suggestions = new ArrayList<DialogSuggestion>();
+        this.suggestions = new ArrayList<com.ibm.model.DialogSuggestion>();
       }
       this.suggestions.add(suggestions);
+      return this;
+    }
+
+    /**
+     * Adds an results to results.
+     *
+     * @param results the new results
+     * @return the RuntimeResponseGeneric builder
+     */
+    public Builder addResults(SearchResult results) {
+      com.ibm.cloud.sdk.core.util.Validator.notNull(results, "results cannot be null");
+      if (this.results == null) {
+        this.results = new ArrayList<SearchResult>();
+      }
+      this.results.add(results);
       return this;
     }
 
@@ -250,7 +270,7 @@ public class RuntimeResponseGeneric extends GenericModel {
      * @param options the options
      * @return the RuntimeResponseGeneric builder
      */
-    public Builder options(List<DialogNodeOutputOptionsElement> options) {
+    public Builder options(List<com.ibm.model.DialogNodeOutputOptionsElement> options) {
       this.options = options;
       return this;
     }
@@ -278,24 +298,35 @@ public class RuntimeResponseGeneric extends GenericModel {
     }
 
     /**
-     * Set the dialogNode.
-     *
-     * @param dialogNode the dialogNode
-     * @return the RuntimeResponseGeneric builder
-     */
-    public Builder dialogNode(String dialogNode) {
-      this.dialogNode = dialogNode;
-      return this;
-    }
-
-    /**
      * Set the suggestions. Existing suggestions will be replaced.
      *
      * @param suggestions the suggestions
      * @return the RuntimeResponseGeneric builder
      */
-    public Builder suggestions(List<DialogSuggestion> suggestions) {
+    public Builder suggestions(List<com.ibm.model.DialogSuggestion> suggestions) {
       this.suggestions = suggestions;
+      return this;
+    }
+
+    /**
+     * Set the header.
+     *
+     * @param header the header
+     * @return the RuntimeResponseGeneric builder
+     */
+    public Builder header(String header) {
+      this.header = header;
+      return this;
+    }
+
+    /**
+     * Set the results. Existing results will be replaced.
+     *
+     * @param results the results
+     * @return the RuntimeResponseGeneric builder
+     */
+    public Builder results(List<SearchResult> results) {
+      this.results = results;
       return this;
     }
   }
@@ -314,8 +345,9 @@ public class RuntimeResponseGeneric extends GenericModel {
     options = builder.options;
     messageToHumanAgent = builder.messageToHumanAgent;
     topic = builder.topic;
-    dialogNode = builder.dialogNode;
     suggestions = builder.suggestions;
+    header = builder.header;
+    results = builder.results;
   }
 
   /**
@@ -334,7 +366,7 @@ public class RuntimeResponseGeneric extends GenericModel {
    * supported by the client application or channel.
    *
    * <p>**Note:** The **suggestion** response type is part of the disambiguation feature, which is
-   * only available for Plus and Premium users.
+   * only available for Premium users.
    *
    * @return the responseType
    */
@@ -444,25 +476,13 @@ public class RuntimeResponseGeneric extends GenericModel {
   /**
    * Gets the topic.
    *
-   * <p>A label identifying the topic of the conversation, derived from the **title** property of
-   * the relevant node.
+   * <p>A label identifying the topic of the conversation, derived from the **user_label** property
+   * of the relevant node.
    *
    * @return the topic
    */
   public String topic() {
     return topic;
-  }
-
-  /**
-   * Gets the dialogNode.
-   *
-   * <p>The ID of the dialog node that the **topic** property is taken from. The **topic** property
-   * is populated using the value of the dialog node's **title** property.
-   *
-   * @return the dialogNode
-   */
-  public String dialogNode() {
-    return dialogNode;
   }
 
   /**
@@ -472,11 +492,34 @@ public class RuntimeResponseGeneric extends GenericModel {
    * choose.
    *
    * <p>**Note:** The **suggestions** property is part of the disambiguation feature, which is only
-   * available for Plus and Premium users.
+   * available for Premium users.
    *
    * @return the suggestions
    */
   public List<DialogSuggestion> suggestions() {
     return suggestions;
+  }
+
+  /**
+   * Gets the header.
+   *
+   * <p>The title or introductory text to show before the response. This text is defined in the
+   * search skill configuration.
+   *
+   * @return the header
+   */
+  public String header() {
+    return header;
+  }
+
+  /**
+   * Gets the results.
+   *
+   * <p>An array of objects containing search results.
+   *
+   * @return the results
+   */
+  public List<SearchResult> results() {
+    return results;
   }
 }

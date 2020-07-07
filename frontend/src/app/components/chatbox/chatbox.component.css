@@ -1,0 +1,120 @@
+.chat-box{
+  cursor: pointer;
+  color: white;
+  position: fixed;
+  bottom: -8px;
+  right: 10px;
+  width: 350px;
+  height: 400px;
+}
+
+.scrolling-box{
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  max-height: 315px;
+  height: 315px;
+}
+
+input.form-control{
+    height: 29.5px !important;
+    font-style: italic;
+    border-radius: 1px;
+    border: white 1px;
+    box-shadow: none;
+    overflow: hidden;
+}
+
+.chat-trigger-open {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  width: 40px;
+  height: 40px;
+  transform: translateY(70px);
+  transition: all 250ms ease-out;
+  border-radius: 50%;
+  transform: translateY(0);
+  opacity: 0.6;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 2px rgba(0, 0, 0, 0.14);
+  background: #000;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+.chat-trigger-open:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  opacity: 1;
+}
+
+.panel-default{
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 2px rgba(0, 0, 0, 0.14);
+}
+.panel-default > .panel-heading, .panel-footer{
+  background-color: #ffff;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.btn, .btn-primary{
+  border-radius: 1px;
+  border: #fff 1px;
+  outline: none;
+  background-color: #fff;
+  color: gray;
+  display: flex;
+  justify-content: center;
+}
+
+.btn-primary:hover,.btn-primary:focus,.btn-primary:active,
+.btn-primary:active:focus:not(:disabled):not(.disabled),
+.btn:focus, .btn:active, .btn:hover{
+    box-shadow: none!important;
+    outline: 0;
+    background-color: #fff;
+    color: #000;
+}
+
+.message-box {
+  margin: 20px 0px;
+  overflow: hidden;
+}
+
+.to-watson {
+    margin-left: 20%;
+}
+
+.to-watson-icon {
+  float: right;
+  font-size: 40px;
+}
+.to-watson-text {
+  color: black;
+  font-size: 12px;
+  padding: 5px 20px;
+  border-radius: 20px;
+  float: right;
+  background: #eaeaea;
+  display: block;
+  clear: both;
+}
+
+.from-watson {
+  max-width: 80%;
+}
+.from-watson-icon {
+  float: left;
+}
+.from-watson-text {
+  font-size: 12px;
+  padding: 5px 20px;
+  border-radius: 20px;
+  background: #34495E;
+  display: block;
+  clear: both;
+  color: white;
+}

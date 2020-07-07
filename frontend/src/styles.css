@@ -1,6 +1,3 @@
-/* You can add global styles to this file, and also import other style files */
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
-
 /* Common */
 body, html, table, button, pagination, a, input{
     font-family: "Century Gothic", Arial, Helvetica, sans-serif;
@@ -15,7 +12,7 @@ body, html, table {
 	margin-left: 0px;
 	padding: 0;
 	width: 100%;
-	background-color: #E7E7E7 !important;
+	background-color: #fff !important;
 }
 
 #pageLoaderIcon.display-hide{
@@ -23,8 +20,8 @@ body, html, table {
 }
 
 .logo {
-    width: 90px;
-    margin-top: -8px;
+    max-height: 37px;
+    margin: 6px 0px 0px 6px;
 }
 
 footer{
@@ -33,7 +30,7 @@ footer{
 }
 
 footer div:first-child{
-    border-top: 1px solid #34495E !important;
+
 }
 
 footer div span{
@@ -41,75 +38,22 @@ footer div span{
     margin-left: -15px;
 }
 
-pagination{
-    margin: 0;
-    padding :0 ;
-    float: right;
-}
-
-td.action{
-    align: center;
-}
-
-td.action a.deleteLink{
-    color: #ff0000;
-}
-
-td.action a.redGlyphicon{
-  color: #FF0000;
-}
-
-td.action a.greenGlyphicon{
- color: green;
-}
-
-td.action a.blueGlyphicon{
- color: blue;
-}
-
-td.action a.grayGlyphicon{
-  color: #cccccc;
-}
-
-div.login{
-    width: 300px;
-}
-
-div.page-title{
-    margin-bottom: 10px;
-}
-
-div.page-title h5{
-    margin : 0;
-    color: #000;
-    font-weight: bold;
-    font-size: 11px;
-}
-
-div.search-panel{
-   margin-bottom: 10px;
-   float: right;
-}
-
-div.search-panel .alert {
-   border: 0;
-   box-shadow: none;
-}
-
-div.input-group button, div.search-panel div.input-group span.input-group-btn button{
-    border: 1px solid #ccc !important;
-}
-
-div.dialog-title{
-     font-weight:bold;
-     margin-bottom: 10px;
-}
-
-div.dialog-row{
- margin-top:10px;
-}
-
 /* Navigation */
+div.container {
+    width: 100%;
+}
+
+a.navbar-brand{
+    padding: 0px;
+    margin-left: 0px !important;
+}
+
+nav.navbar{
+    border-radius: 0px;
+    min-height: 50px;
+    margin-bottom: 0px;
+}
+
 nav div:first-child{
     padding-left : 0;
     padding-right: 0;
@@ -131,54 +75,6 @@ nav.navbar-default{
     color: #FF0000 !important;
 }
 
-/* Form */
-.form-control, button.btn{
-    height: 28px !important;
-    font-size: 11px  !important;
-}
-
-.error-field {
-   border-color: #FF0000 !important;
-}
-
-label{
-    font-weight: normal;
-}
-
-a.save-button, button.save-button{
-    width:80px;
-}
-button.cancel-button{
-     width:80px;
-}
-
-textarea {
-    resize: none;
-}
-
-/* Grid */
-div.grid{
-    padding : 0;
-}
-
-table.table-content{
-     margin-bottom: 10px;
-     border-bottom: 1px solid #ccc !important;
-}
-
-table.table-header{
-    margin-bottom: 0px;
-    background-color: #FFFFFF !important;
-}
-
-table.table-content{
- background-color: #FFFFFF !important;
-}
-
-table.table-header tr td {
-    font-weight:bold;
-}
-
-ul.pagination{
-    margin:0;
+.jumbotron{
+    background: #fff !important;
 }

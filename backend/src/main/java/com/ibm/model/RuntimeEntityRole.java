@@ -16,8 +16,8 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
 
 /**
  * An object describing the role played by a system entity that is specifies the beginning or end of
- * a range recognized in the user input. This property is included only if the new system model
- * are enabled for the workspace.
+ * a range recognized in the user input. This property is included only if the new system entities
+ * are enabled for the skill.
  */
 public class RuntimeEntityRole extends GenericModel {
 

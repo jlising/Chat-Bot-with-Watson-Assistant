@@ -7,17 +7,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 //Third party components
 import { ToasterModule, ToasterService } from 'angular2-toaster';
-import { PaginationModule } from 'ngx-bootstrap';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material';
 
 //App components
 import { AppGlobal } from './app.global';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AjaxLoaderComponent } from './components/ajax-loader/ajax-loader.component';
-import { ChatbotDialogComponent } from './components/chatbot/chatbot-dialog.component';
+import { ChatboxComponent } from './components/chatbox/chatbox.component';
 
 // Templates
 import { HeaderComponent } from './components/common/header.component';
@@ -28,7 +24,7 @@ import { DefaultPageComponent } from './components/common/default-page.component
 // Services
 import { MyHttpInterceptor } from './components/common/my.http.interceptor';
 import { AjaxLoaderService } from './components/ajax-loader/ajax-loader.service';
-import { ChatBotService } from './components/chatbot/chatbot.service';
+import { ChatboxService } from './components/chatbox/chatbox.service';
 
 @NgModule({
   declarations: [
@@ -38,25 +34,22 @@ import { ChatBotService } from './components/chatbot/chatbot.service';
    DefaultPageComponent,
    AjaxLoaderComponent,
    AppComponent,
-   ChatbotDialogComponent
+   ChatboxComponent
   ],
-  entryComponents: [ChatbotDialogComponent],
+  entryComponents: [],
   imports: [
      BrowserModule, //Configure browser-based application to transition from a server-rendered app. If not imported, ngIf, routings won't work.
      BrowserAnimationsModule,
      AppRoutingModule, //Routing
      HttpClientModule,
      FormsModule,
-     MatDialogModule,
-     MatDatepickerModule,
-     MatNativeDateModule,
      ToasterModule
   ],
   providers: [  Title,
                 AppGlobal,
-                ChatBotService,
                 ToasterService,
                 AjaxLoaderService,
+                ChatboxService,
              	{provide: LocationStrategy, useClass: HashLocationStrategy},
                 {provide: HTTP_INTERCEPTORS, useClass: MyHttpInterceptor, multi: true, }
              			 ],

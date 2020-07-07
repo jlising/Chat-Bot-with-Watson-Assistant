@@ -1,0 +1,43 @@
+<div class="container">
+  <div #chatTrigger class="chat-trigger-open">
+    <i class="fa fa-comments" aria-hidden="true"></i>
+  </div>
+
+  <div #chatBox class="panel panel-default chat-box">
+    <div class="panel-heading">
+      <h3 class="panel-title">Welcome to T-Mobile!</h3>
+      <span class="fa fa-times pull-right panel-icon chat-trigger-close">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    </div>
+	
+	<div #scrollMe class="panel-body scrolling-box">
+          <div *ngFor="let p of currentDialog">
+            <div class="message-box">
+              <div class="{{p.direction}}">
+                <div class="{{p.direction+'-text'}}">
+                  <div *ngIf="p.text" [innerHTML]="p.text"></div>
+                  <img *ngIf="p.source" src="{{p.source}}" width="100%">
+                  <div *ngIf="p.options">
+                    <div *ngIf="p.title" [innerHTML]="p.title"></div>
+                    <div *ngFor="let c of p.options">
+                      <br/>
+                      <button type="button" (click)="assistantResponse(c)" class="btn btn-primary">{{c.label}}</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+
+    <div class="panel-footer">
+      <div class="input-group">
+
+        <input [(ngModel)]="queryString" name= "queryString" type="text" class="form-control" placeholder="Type your message..." (keydown)="keyMessage($event)">
+
+        <span class="input-group-btn">
+          <button class="btn btn-primary" type="button" (click)="submit()"><i aria-hidden="true" class="fa fa-paper-plane-o"></i></button>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
